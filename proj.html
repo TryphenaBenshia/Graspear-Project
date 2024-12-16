@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meat Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        header {
+            background: #28a745;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        .shop-items {
+            padding: 20px;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .item-price {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .add-to-cart {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .add-to-cart:hover {
+            background: #0056b3;
+        }
+
+        .cart {
+            padding: 20px;
+            border-top: 2px solid #28a745;
+        }
+
+        .cart h2 {
+            margin-top: 0;
+        }
+
+        .cart-total {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Meat Shop</h1>
+        </header>
+
+        <div class="shop-items">
+            <div class="item">
+                <span class="item-name">Leg</span>
+                <span class="item-price">250g</span>
+                <button class="add-to-cart" data-name="leg" data-weight="250">Add to Cart</button>
+            </div>
+
+            <div class="item">
+                <span class="item-name">Wing</span>
+                <span class="item-price">250g</span>
+                <button class="add-to-cart" data-name="wing" data-weight="250">Add to Cart</button>
+            </div>
+
+            <div class="item">
+                <span class="item-name">Body</span>
+                <span class="item-price">1kg</span>
+                <button class="add-to-cart" data-name="body" data-weight="1000">Add to Cart</button>
+            </div>
+        </div>
+
+        <div class="cart">
+            <h2>Shopping Cart</h2>
+            <ul id="cart-items"></ul>
+            <div class="cart-total" id="cart-total">Total:</div>
+        </div>
+    </div>
+
+    <script>
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+
+        let total = 0;
+
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const name = button.getAttribute('data-name');
+                const weight = parseFloat(button.getAttribute('data-weight'));
+                
+                const listItem = document.createElement('li');
+                listItem.textContent = `${name} - ${weight.toFixed(2)}`;
+                cartItems.appendChild(listItem);
+
+    
+                total += weight;
+                cartTotal.textContent = `Total: ${total.toFixed(2)} g`;
+            });
+        });
+    </script>
+</body>
+</html>
